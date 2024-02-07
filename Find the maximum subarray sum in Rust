@@ -1,0 +1,30 @@
+// Question - 12
+
+fn max_subarray_sum(arr: &[i32]) -> i32 {
+    let mut max_sum = arr[0];
+    let mut current_sum = arr[0];
+
+    for &num in &arr[1..] {
+        current_sum = current_sum.max(current_sum + num);
+        max_sum = max_sum.max(current_sum);
+    }
+
+    max_sum
+}
+
+fn main() {
+  
+    println!("Enter an array of integers separated by spaces:");
+    let mut input_array = String::new();
+    std::io::stdin().read_line(&mut input_array).expect("Failed to read line");
+
+    let array: Vec<i32> = input_array
+        .trim()
+        .split_whitespace()
+        .map(|s| s.parse().expect("Invalid input"))
+        .collect();
+
+    
+    let max_sum = max_subarray_sum(&array);
+    println!("Maximum Subarray Sum: {}", max_sum);
+}
