@@ -1,0 +1,33 @@
+CODE::- 
+
+fn find_median(arr: &[i32]) -> f64 {
+    let len = arr.len();
+
+    if len % 2 == 0 {
+  
+        let mid_right = len / 2;
+        let mid_left = mid_right - 1;
+        return (arr[mid_left] as f64 + arr[mid_right] as f64) / 2.0;
+    } else {
+   
+        return arr[len / 2] as f64;
+    }
+}
+
+fn main() {
+   
+    println!("Enter a array of integers separated by spaces:");
+    let mut input_array = String::new();
+    std::io::stdin().read_line(&mut input_array).expect("Failed");
+
+    let sorted_array: Vec<i32> = input_array
+        .trim()
+        .split_whitespace()
+        .map(|s| s.parse().expect("Invalid input"))
+        .collect();
+
+   
+    let median = find_median(&sorted_array);
+
+    println!("The median of the array is: {}", median);
+}
