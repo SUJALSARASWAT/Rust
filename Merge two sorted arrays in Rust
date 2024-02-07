@@ -1,0 +1,51 @@
+CODE ::-
+
+fn merge_sorted_arrays(arr1: &[i32], arr2: &[i32]) -> Vec<i32> {
+    let mut merged_array = Vec::with_capacity(arr1.len() + arr2.len());
+    let (mut i, mut j) = (0, 0);
+
+    while i < arr1.len() && j < arr2.len() {
+        if arr1[i] < arr2[j] {
+            merged_array.push(arr1[i]);
+            i += 1;
+        } else {
+            merged_array.push(arr2[j]);
+            j += 1;
+        }
+    }
+
+   
+    merged_array.extend_from_slice(&arr1[i..]);
+
+    merged_array.extend_from_slice(&arr2[j..]);
+
+    merged_array
+}
+
+fn main() {
+
+    println!("Enter the first sorted array of integers separated by spaces:");
+    let mut input_array1 = String::new();
+    std::io::stdin().read_line(&mut input_array1).expect("Failed");
+
+    println!("Enter the second sorted array of integers separated by spaces:");
+    let mut input_array2 = String::new();
+    std::io::stdin().read_line(&mut input_array2).expect("Failed");
+
+    let array1: Vec<i32> = input_array1
+        .trim()
+        .split_whitespace()
+        .map(|s| s.parse().expect("Invalid input"))
+        .collect();
+
+    let array2: Vec<i32> = input_array2
+        .trim()
+        .split_whitespace()
+        .map(|s| s.parse().expect("Invalid input"))
+        .collect();
+
+
+    let merged_array = merge_sorted_arrays(&array1, &array2);
+
+    println!("Merged Sorted Array: {:?}", merged_array);
+}
