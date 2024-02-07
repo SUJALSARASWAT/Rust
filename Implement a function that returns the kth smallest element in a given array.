@@ -1,0 +1,36 @@
+CODE ::- 
+
+fn kth_smallest(arr: &[i32], k: usize) -> Option<i32> {
+    if k > 0 && k <= arr.len() {
+        let mut sorted_arr = arr.to_vec();
+        sorted_arr.sort();
+
+        Some(sorted_arr[k - 1])
+    } else {
+        None
+    }
+}
+
+fn main() {
+    
+    println!("Enter integers separated by spaces:");
+    let mut input_array = String::new();
+    std::io::stdin().read_line(&mut input_array).expect("Failed");
+
+    let array: Vec<i32> = input_array
+        .trim()
+        .split_whitespace()
+        .map(|s| s.parse().expect("Invalid input"))
+        .collect();
+
+    println!("Enter the value of k:");
+    let mut input_k = String::new();
+    std::io::stdin().read_line(&mut input_k).expect("Failed");
+
+    let k: usize = input_k.trim().parse().expect("Invalid input");
+
+    match kth_smallest(&array, k) {
+        Some(smallest) => println!("The {}th smallest element is: {}", k, smallest),
+        None => println!("Invalid value of k."),
+    }
+}
